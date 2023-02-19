@@ -140,9 +140,9 @@ ranking metrics (e.g. P-score).
 >
 > Output:
 >
-> <img src="README_files/figure-markdown_strict/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+> <img src="https://github.com/EnochKang/rankinma/blob/main/vignettes/Figure%201A.png?raw=true" style="display: block; margin: auto;" />
 >
-> <img src="README_files/figure-markdown_strict/unnamed-chunk-6-2.png" alt="Figure 1. examples of bar chart for SUCRA on two outcomes."  />
+> <img src="https://github.com/EnochKang/rankinma/blob/main/vignettes/Figure%201B.png?raw=true" alt="Figure 1. examples of bar chart for SUCRA on two outcomes."  />
 > <p class="caption">
 > Figure 1. examples of bar chart for SUCRA on two outcomes.
 > </p>
@@ -197,7 +197,7 @@ metrics yet.
 >     ## Readers of 'Meta-Analysis with R (Use R!)' should install
 >     ## older version of 'netmeta' package: https://tinyurl.com/kyz6wjbb
 >
-> <img src="README_files/figure-markdown_strict/unnamed-chunk-11-1.png" alt="Figure 2A. an exmaple of composite line chart for probabilities of treatments on each rank."  />
+> <img src="https://github.com/EnochKang/rankinma/blob/main/vignettes/Figure%202A.png?raw=true" alt="Figure 2A. an exmaple of composite line chart for probabilities of treatments on each rank."  />
 > <p class="caption">
 > Figure 2A. an exmaple of composite line chart for probabilities of
 > treatments on each rank.
@@ -205,7 +205,7 @@ metrics yet.
 >
 > or
 >
-> <img src="README_files/figure-markdown_strict/unnamed-chunk-12-1.png" alt="**Figure 2B**. an example of accumulative bar chart for probabilities of treatments on each rank."  />
+> <img src="https://github.com/EnochKang/rankinma/blob/main/vignettes/Figure%202B.png?raw=true" alt="**Figure 2B**. an example of accumulative bar chart for probabilities of treatments on each rank."  />
 > <p class="caption">
 > **Figure 2B**. an example of accumulative bar chart for probabilities
 > of treatments on each rank.
@@ -332,12 +332,11 @@ metrics yet.
 >     ##   8 sita
 >     ##   9 sulf
 >     ##   10 vild
->
 >     ##  Inherit -------------------------------------------------- V
 >     ##  Metrics -------------------------------------------------- V
 >     ##  Color ---------------------------------------------------- V
 >
-> <img src="README_files/figure-markdown_strict/unnamed-chunk-18-1.png" alt="Figure 3. an example of beading plot for P-score on two outcomes"  />
+> <img src="https://github.com/EnochKang/rankinma/blob/main/vignettes/Figure%20.png?raw=true" alt="Figure 3. an example of beading plot for P-score on two outcomes"  />
 > <p class="caption">
 > Figure 3. an example of beading plot for P-score on two outcomes
 > </p>
