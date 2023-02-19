@@ -1,4 +1,4 @@
-<img src="../rankinma/vignettes/rankinma_logo.png" width="15%" />
+<img src="https://github.com/EnochKang/rankinma/blob/main/vignettes/rankinma_logo.png?raw=true" width="15%" />
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/rankinma)](https://cran.r-project.org/package=rankinma)
 [![Monthly
