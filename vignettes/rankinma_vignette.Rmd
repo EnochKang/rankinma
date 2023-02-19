@@ -1,0 +1,325 @@
+---
+title: "rankinma_vignette"
+author: "Enoch Kang, Chiehfeng Chen Wen-Hsuan Hou, & Jin-Hua Chen"
+date: "Feb. 10, 2023"
+description: > 
+  Treatment ranking in network meta-analysis.
+output: 
+  rmarkdown::html_vignette:
+    toc: TRUE
+    md_keep: TRUE
+vignette: >
+  %\VignetteIndexEntry{rankinma_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+  )
+library(rankinma)
+```
+
+
+```{r echo = FALSE, out.width = "10%"}
+knitr::include_graphics("rankinma_logo.png")
+```
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/rankinma)](https://cran.r-project.org/package=rankinma)
+[![Monthly Downloads](http://cranlogs.r-pkg.org/badges/rankinma)](http://cranlogs.r-pkg.org/badges/rankinma)
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/rankinma)](https://cran.r-project.org/package=rankinma)
+
+
+## Brief overview
+
+Package *rankinma* supports users to easily obtain and visualize various metrics of treatment ranking from network meta-analysis no matter using frequentist or Bayesian approach. This package not only accepts manual-prepared data set of treatment ranking metrics from users, but also can help users to gather various treatment ranking metrics in network meta-analysis. Users can use functions in *rankinma* by calling the library with following syntax:
+
+```{r setup}
+library(rankinma)
+```
+
+
+## Feature
+
+*rankinma* allows users to visualize various treatment ranking metrics in network meta-analysis based either common-effect model or random-effects model. The current version includes three common metrics of treatment ranking.  
+
+- **Probabilities:** probabilities of every available treatment on each possible rank.
+- **SUCRA:** the value of surface under the cumulative ranking curve using Bayesian approach.
+- **P-score:** the value of SUCRA using frequentist approach.
+
+
+Briefly, *rankinma* can be used for visualization of both detailed metrics of probabilities and global metrics (i.e. SUCRA and P-score). Besides, *rankinma* provides users multiple types of plots to illustrate aforementioned treatment ranking metrics, and current version consists of five types of plots with six sub-types.
+
+- **Beading plot:** a novel graphics for displaying global metrics of treatment ranking (i.e. SUCRA and P-score) based on numeric line plot.
+- **Bar chart:** a classic graphics for most metrics of treatment ranking (i.e. probabilities, SUCRA, and P-score), and *rankinma* supports two sub-type of bar chart in terms of side-by-side bar chart and cumulative bar chart.
+- **Line chart:** a classic graphics for most metrics of treatment ranking (i.e. probabilities, SUCRA, and P-score), and *rankinma* supports two sub-type of line chart in terms of simple line chart (a line on a chart) and composite line chart (multiple lines on a chart).
+
+
+## Flow and functions
+
+Users can visualize treatment ranking after network meta-analysis in five steps, but have to check condition before using *rankinma*.
+
+**Situation 1:** Users have treatment ranking metrics of outcome(s).  
+  
+**Situation 2:** Users have data for network meta-analysis of **a single outcome** but do not get treatment ranking metrics yet.
+  
+**Situation 3:** Users have data for network meta-analysis of **various outcomes** but do not get treatment ranking metrics yet.  
+\
+
+#### For situation 1:
+
+**Step 1.** Build or load data of treatment ranking metrics.
+
+**Step 2.** Setup data in *rankinma* format using function `SetMetrics()`.
+
+**Step 3.** Visualization using function `PlotBeads()`, `PlotBar()`, or `PlotLine()`.
+
+
+#### For situation 2:
+
+**Step 1.** Load data and do network meta-analysis.
+
+**Step 2.** Get treatment ranking metrics from the network meta-analysis using function `GetMetrics()`.
+
+**Step 3.** Setup data in *rankinma* format using function `SetMetrics()`.
+
+**Step 4.** Visualization using function `PlotBeads()`, `PlotBar()`, or `PlotLine()`.
+
+
+#### For situation 3:
+
+**Step 1.** Load data and do network meta-analysis.
+
+**Step 2.** Get treatment ranking metrics from the network meta-analysis using function `GetMetrics()`.
+
+--- Repeat step 1 and 2 for each outcome, and keep output of them for the further steps. ---
+
+**Step 3.** Combine treatment ranking metrics using function `rbind()` in R *base*.
+
+**Step 4.** Setup data in *rankinma* format using function `SetMetrics()`.
+
+**Step 5.** Visualization using function `PlotBeads()`, `PlotBar()`, or `PlotLine()`.
+
+
+## Usage and examples
+
+The following steps and syntax demonstrate how user can illustrate a summary of treatment ranking metrics on various outcomes from network meta-analysis.
+
+Example 1 for illustrating bar chart when users already have treatment ranking metrics (e.g. P-score).
+
+> **STEP 1.** Build data
+> ```{r, eval = FALSE}
+data <- data.frame(tx = c("A", "B", "C", "A", "B", "C"),
+                   outcome = c("mortality", "mortality", "mortality", "recurrent", "recurrent", "recurrent"), 
+                   SUCRA = c(0.8, 0.7, 0.5, 0.9, 0.5, 0.8))
+> ```
+>
+> **STEP 2.** Set data for rankinma
+> ```{r, eval = FALSE}
+dataRankinma <- SetMetrics(data, 
+                           tx = tx, 
+                           outcome = outcome, 
+                           metrics = SUCRA, 
+                           metrics.name = "SUCRA")
+> ```
+>
+> **STEP 3.** Illustrate bar chart
+> ```{r, eval = FALSE}
+PlotBar(data = dataRankinma)
+> ```
+> 
+> Output:
+>
+> ```{r, echo = FALSE, warning = FALSE, results = FALSE, message = FALSE, error = FALSE, fig.keep = "all", fig.cap = c("", "Figure 1. examples of bar chart for SUCRA on two outcomes."), fig.height = 5, fig.width = 5, fig.align = "center", out.width = "50%"}
+library("rankinma")
+data <- data.frame(tx = c("A", "B", "C", "A", "B", "C"),
+                   outcome = c("mortality", "mortality", "mortality", "recurrent", "recurrent", "recurrent"), 
+                   SUCRA = c(0.8, 0.7, 0.5, 0.9, 0.5, 0.8))
+dataRankinma <- SetMetrics(data, 
+                           tx = tx, 
+                           outcome = outcome, 
+                           metrics = SUCRA, 
+                           metrics.name = "SUCRA")
+PlotBar(data = dataRankinma)
+> ```
+>
+
+
+Example 2 for illustrating line chart when users have data for network meta-analysis of a single outcome but do not get treatment ranking metrics yet.
+
+> **STEP 1.** Load data
+> ```{r, eval = FALSE}
+library(netmeta)
+data(Senn2013)
+nmaOutput <- netmeta(TE, 
+                     seTE, 
+                     treat1, 
+                     treat2, 
+                     studlab, 
+                     data = Senn2013, 
+                     sm = "SMD")
+> ```
+>
+> **STEP 2.** Get Probabilities
+> ```{r, eval = FALSE}
+dataMetrics <- GetMetrics(nmaOutput, 
+                          outcome = "HbA1c.random", 
+                          prefer = "small", 
+                          metrics = "Probabilities", 
+                          model = "random", 
+                          simt = 1000)
+> ```
+>
+> **STEP 3.**  Set data for rankinma
+> ```{r, eval = FALSE}
+dataRankinma <- SetMetrics(dataMetrics, 
+                           tx = tx, 
+                           outcome = outcome, 
+                           metrics.name = "Probabilities")
+> ```
+>
+> **STEP 4.** Illustrate line chart
+> ```{r, eval = FALSE}
+PlotLine(data = dataRankinma, 
+         compo = TRUE)
+> ```
+>
+> Output:
+>
+> ```{r, eval = TRUE, echo = FALSE, warning = FALSE, results = FALSE, fig.cap = "Figure 2A. an exmaple of composite line chart for probabilities of treatments on each rank.", fig.height = 5, fig.width = 7, fig.align = "center", out.width = "90%"}
+library(netmeta)
+data(Senn2013)
+nmaOutput <- netmeta(TE, 
+                     seTE, 
+                     treat1, 
+                     treat2, 
+                     studlab, 
+                     data = Senn2013, 
+                     sm = "SMD")
+dataMetrics <- GetMetrics(nmaOutput, 
+                          outcome = "HbA1c.random", 
+                          prefer = "small", 
+                          metrics = "Probabilities", 
+                          model = "random", 
+                          simt = 1000)
+dataRankinma <- SetMetrics(dataMetrics, 
+                           tx = tx, 
+                           outcome = outcome, 
+                           metrics.name = "Probabilities")
+PlotLine(data = dataRankinma, 
+         compo = TRUE)
+> ```
+>
+> or
+>
+> ```{r, eval = TRUE, echo = FALSE, warning = FALSE, results = FALSE, fig.cap = "**Figure 2B**. an example of accumulative bar chart for probabilities of treatments on each rank.", fig.height = 5, fig.width = 7, fig.align = "center", out.width = "90%"}
+library(netmeta)
+data(Senn2013)
+nmaOutput <- netmeta(TE, 
+                     seTE, 
+                     treat1, 
+                     treat2, 
+                     studlab, 
+                     data = Senn2013, 
+                     sm = "SMD")
+dataMetrics <- GetMetrics(nmaOutput, 
+                          outcome = "HbA1c.random", 
+                          prefer = "small", 
+                          metrics = "Probabilities", 
+                          model = "random", 
+                          simt = 1000)
+dataRankinma <- SetMetrics(dataMetrics, 
+                           tx = tx, 
+                           outcome = outcome, 
+                           metrics.name = "Probabilities")
+PlotBar(data = dataRankinma, 
+        accum = TRUE)
+> ```
+>
+
+
+Example 3 for illustrating beading plot when users have data for network meta-analysis of multiple outcomes but do not get treatment ranking metrics yet.
+
+> **STEP 1.** Load data
+> ```{r, eval = FALSE}
+library(netmeta)
+data(Senn2013)
+nmaOutput <- netmeta(TE, 
+                     seTE, 
+                     treat1, 
+                     treat2, 
+                     studlab, 
+                     data = Senn2013, 
+                     sm = "SMD")
+> ```
+>
+> **STEP 2.** Get SUCRA
+> ```{r, eval = FALSE}
+nmaRandom <- GetMetrics(nmaOutput, 
+                        outcome = "HbA1c.random", 
+                        prefer = "small", 
+                        metrics = "P-score", 
+                        model = "random", 
+                        simt = 1000)
+nmaCommon <- GetMetrics(nmaOutput, 
+                        outcome = "HbA1c.common", 
+                        prefer = "small", 
+                        metrics = "P-score", 
+                        model = "common", 
+                        simt = 1000)
+> ```
+>
+> **STEP 3.** Combine metrics from multiple outcomes
+> ```{r, eval = FALSE}
+dataMetrics <- rbind(nmaRandom, nmaCommon)
+> ```
+>
+> **STEP 4.** Set data for rankinma
+> ```{r, eval = FALSE}
+dataRankinma <- (dataMetrics, 
+                 tx = tx, 
+                 outcome = outcome, 
+                 metrics = P.score, 
+                 metrics.name = "P-score")
+> ```
+>
+> **STEP 5.** Illustrate beading plot
+> ```{r, eval = FALSE}
+PlotBeads(data = dataRankinma)
+> ```
+>
+> Output:
+>
+> ```{r, eval = TRUE, echo = FALSE,  fig.cap = "Figure 3. an example of beading plot for P-score on two outcomes", fig.height = 4, fig.width = 8, fig.align = "center", out.width = "80%"}
+library(netmeta)
+data(Senn2013)
+nmaOutput <- netmeta(TE, 
+                     seTE, 
+                     treat1, 
+                     treat2, 
+                     studlab, 
+                     data = Senn2013, 
+                     sm = "SMD")
+nmaRandom <- GetMetrics(nmaOutput, 
+                        outcome = "HbA1c.random", 
+                        prefer = "small", 
+                        metrics = "P-score", 
+                        model = "random", 
+                        simt = 1000)
+nmaCommon <- GetMetrics(nmaOutput, 
+                        outcome = "HbA1c.common", 
+                        prefer = "small", 
+                        metrics = "P-score", 
+                        model = "common", 
+                        simt = 1000)
+dataMetrics <- rbind(nmaRandom, nmaCommon)
+dataRankinma <- SetMetrics(dataMetrics, 
+                           tx = tx, 
+                           outcome = outcome, 
+                           metrics = P.score, 
+                           metrics.name = "P-score")
+PlotBeads(data = dataRankinma)
+> ```
+>
