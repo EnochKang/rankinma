@@ -336,7 +336,7 @@ metrics yet.
 >     ##  Metrics -------------------------------------------------- V
 >     ##  Color ---------------------------------------------------- V
 >
-> <img src="https://github.com/EnochKang/rankinma/blob/main/vignettes/Figure%20.png?raw=true" alt="Figure 3. an example of beading plot for P-score on two outcomes"  />
+> <img src="https://github.com/EnochKang/rankinma/blob/main/vignettes/Figure%203.png?raw=true" alt="Figure 3. an example of beading plot for P-score on two outcomes"  />
 > <p class="caption">
 > Figure 3. an example of beading plot for P-score on two outcomes
 > </p>
