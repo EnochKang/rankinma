@@ -2,6 +2,11 @@
 
 ## rankinma 0.1.4
 
+Date: Feb. 19, 2023
+
+**Push to github**  
+\
+
 Date: Feb. 10, 2023
 
 **Modify function:** all functions were modified due to warnings regarding *... invisible binding for '<<-' assignment ...* .

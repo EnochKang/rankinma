@@ -1,5 +1,17 @@
 <img src="https://github.com/EnochKang/rankinma/blob/main/vignettes/rankinma_logo.png?raw=true" width="15%" />
 
+# *rankinma*: Ranks of treatments in synthesis
+
+## Authors
+
+[Chiefeng Chen](https://orcid.org/0000-0002-1595-6553),
+[Enoch Kang](https://orcid.org/0000-0002-4903-942X),
+[Wen-Hsuan Hou](https://orcid.org/0000-0002-4376-6298),
+[Jin-Hua Chen](https://orcid.org/0000-0002-3130-4125),
+[Yu-Chieh Chuang](https://orcid.org/0000-0002-7124-6556), &
+[Edwin Chan](https://www.duke-nus.edu.sg/core/about/people-leadership/core-visiting-experts/edwin-chan-shih-yen)
+
+
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/rankinma)](https://cran.r-project.org/package=rankinma)
 [![Monthly
 Downloads](http://cranlogs.r-pkg.org/badges/rankinma)](http://cranlogs.r-pkg.org/badges/rankinma)
@@ -7,11 +19,12 @@ Downloads](http://cranlogs.r-pkg.org/badges/rankinma)](http://cranlogs.r-pkg.org
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/rankinma)](https://cran.r-project.org/package=rankinma)
 
 Package *rankinma* supports users to easily obtain and visualize various
-metrics of treatment ranking from network meta-analysis no matter using
-frequentist or Bayesian approach. This package not only accepts
-manual-prepared data set of treatment ranking metrics from users, but
-also can help users to gather various treatment ranking metrics in
-network meta-analysis. Users can install *rankinma* in R using following
+metrics of treatment ranking from network meta-analysis without major
+concerns regarding heterogeneity, intransitivity, and incoherence. This
+package not only accepts manual-prepared data set of treatment ranking
+metrics from users, but also can help users to gather various treatment
+ranking metrics in network meta-analysis no matter using frequentist or
+Bayesian approach. Users can install *rankinma* in R using following
 syntax:
 
     install.packages("rankinma")
