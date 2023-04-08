@@ -1,4 +1,4 @@
-#' @title Setup data of treatment ranking metrics for rankinma use
+#' @title Setup data of treatment ranking metrics for rankinma
 #'
 #' @author Enoch Kang
 #'
@@ -22,6 +22,7 @@
 #' @seealso \code{\link{GetMetrics}}
 #'
 #' @examples
+#' ## Not run:
 #' library(netmeta)
 #' data(Senn2013)
 #' nma <- netmeta(TE, seTE, treat1, treat2,
@@ -39,6 +40,7 @@
 #' # Set data for rankinma
 #' dataRankinma <- SetMetrics(dataMetrics, tx = tx, outcome = outcome,
 #'   metrics = SUCRA, metrics.name = "SUCRA")
+#' ## End(Not run)
 #'
 #' @export SetMetrics
 
@@ -47,7 +49,7 @@ SetMetrics <- function(data,
                        tx = NULL,
                        metrics = NULL,
                        metrics.name = NULL) {
-
+  
   data <- data.frame(data)
   lsMetrics <- c("Probabilities", "P-best", "SUCRA", "P-score")
 
@@ -168,40 +170,63 @@ SetMetrics <- function(data,
 
   data$importance <- max(data$outcomes) + 1 - data$outcomes
 
-  data$color.r <- 0.2
-  data$color.g <- 0.2
-  data$color.b <- 0.2
+  data$color.r <- NA
+  data$color.g <- NA
+  data$color.b <- NA
 
-  for (i in seq(1, nrow(data))){
-    j <- c(1, 4:5); k <- c(6, 9:10); l <- c(11, 14:15); m <- c(16, 19:20); n <- c(21, 24:25)
-    data[i, "color.r"] <-ifelse(data[i, "txs"] %in% c(j, j + 25, j + 50, j + 75), 1,
-                                   ifelse(data[i, "txs"] %in% c(k, k + 25, k + 50, k + 75), 0.80,
-                                          ifelse(data[i, "txs"] %in% c(l, l + 25, l + 50, l + 75), 0.50,
-                                                 ifelse(data[i, "txs"] %in% c(m, m + 25, m + 50, m + 75), 0.65,
-                                                        ifelse(data[i, "txs"] %in% c(n, n + 25, n + 50, n + 75), 0.55,
-                                                               data[i, "color.r"])))))
+  txColor <- data.frame(lsTx   = unique(data$tx),
+                        seqTx  = c(1:length(unique(data$tx))),
+                        color.r = NA,
+                        color.g = NA,
+                        color.b = NA)
+  txColor$color.base <- (max(txColor$seqTx) - txColor$seqTx^0.99) / max(txColor$seqTx)
+  for (color.i in seq(from = 1, to = nrow(txColor), by = 3)) {
+    txColor[color.i, "color.r"] <- txColor$color.base[color.i]
+    txColor[color.i, "color.g"] <- txColor$color.base[max(txColor$seqTx)+1-color.i]
+    txColor[color.i, "color.b"] <- txColor$color.base[max(txColor$seqTx)+1-color.i]
   }
-
-  for (i in seq(1, nrow(data))){
-    j<- c(2,4);k<- c(7,9);l<- c(12,14);m<- c(17,19);n<- c(22,24)
-    data[i, "color.g"] <-ifelse(data[i, "txs"] %in% c(j, j + 25, j + 50, j + 75), 1,
-                                   ifelse(data[i, "txs"] %in% c(k, k + 25, k + 50, k + 75), 0.65,
-                                          ifelse(data[i, "txs"] %in% c(l, l + 25, l + 50, l + 75), 0.80,
-                                                 ifelse(data[i, "txs"] %in% c(m, m + 25, m + 50, m + 75), 0.45,
-                                                        ifelse(data[i, "txs"] %in% c(n, n + 25, n + 50, n + 75), 0.55,
-                                                               data[i, "color.g"])))))
+  for (color.i in seq(from = 2, to = nrow(txColor), by = 3)) {
+    txColor[color.i, "color.r"] <- txColor$color.base[max(txColor$seqTx)+1-color.i]
+    txColor[color.i, "color.g"] <- txColor$color.base[color.i]
+    txColor[color.i, "color.b"] <- txColor$color.base[max(txColor$seqTx)+1-color.i]
   }
-
-  for (i in seq(1, nrow(data))){
-    j <- c(3, 5); k <- c(8, 10); l <- c(13, 15); m <- c(18, 20); n <- c(23, 25)
-    data[i, "color.b"] <-ifelse(data[i, "txs"] %in% c(j, j + 25, j + 50, j + 75), 1,
-                                   ifelse(data[i, "txs"] %in% c(k, k + 25, k + 50, k + 75), 0.50,
-                                          ifelse(data[i, "txs"] %in% c(l, l + 25, l + 50, l + 75), 0.80,
-                                                 ifelse(data[i, "txs"] %in% c(m, m + 25, m + 50, m + 75), 0.40,
-                                                        ifelse(data[i, "txs"] %in% c(n, n + 25, n + 50, n + 75), 0.55,
-                                                               data[i, "color.b"])))))
+  for (color.i in seq(from = 3, to = nrow(txColor), by = 3)) {
+    txColor[color.i, "color.r"] <- txColor$color.base[max(txColor$seqTx)+1-color.i]
+    txColor[color.i, "color.g"] <- txColor$color.base[max(txColor$seqTx)+1-color.i]
+    txColor[color.i, "color.b"] <- txColor$color.base[color.i]
   }
+  
+  txColor$color.r1 <- txColor$color.r
+  txColor$color.g1 <- txColor$color.g
+  txColor$color.b1 <- txColor$color.b
 
+  txColor$color.r2 <- 1-txColor$color.r^2*1.3
+  txColor$color.g2 <- 1-txColor$color.g^2*1.3
+  txColor$color.b2 <- 1-txColor$color.b^2*1.3
+
+  txColor$color.r <- 1-(1-txColor$color.r)^1.2
+  txColor$color.g <- txColor$color.g^0.3
+  txColor$color.b <- 1-(1-txColor$color.b)^2
+  
+  for (color.i in c(1:nrow(data))) {
+    data[color.i, "color.r"] <- txColor[which(data[color.i, "tx"] == txColor$lsTx), "color.r"]
+    data[color.i, "color.g"] <- txColor[which(data[color.i, "tx"] == txColor$lsTx), "color.g"]
+    data[color.i, "color.b"] <- txColor[which(data[color.i, "tx"] == txColor$lsTx), "color.b"]
+  }
+  
+  #plot(7, 0.5, xlim = c(1, 10), ylim = c(0, 1),
+  #     frame = F, col = rgb(1, 1, 1, 1))
+  #points(txColor$seqTx, txColor$color.base, pch = 16,
+  #       col = rgb(1-(1-txColor$color.r)^1.2,
+  #                 txColor$color.g^0.3, 
+  #                 1-(1-txColor$color.b)^2,
+  #                 0.9))
+  #points(txColor$seqTx, txColor$color.base, pch = 16,
+  #       col = rgb(1-1/(i^0.7),
+  #                 (max(i)-i^0.99)/max(i), 
+  #                 1/(i^0.3),
+  #                 0.9))
+  
   sink(tempfile())
   data$color.tx <- print(rgb(data$color.r,
                              data$color.g,
@@ -239,16 +264,17 @@ SetMetrics <- function(data,
 
   }
 
+  dataList        <- list(metrics.name = metrics.name,
+                          ls.outcome   = unique(data$outcome),
+                          ls.tx        = unique(data$tx),
+                          n.outcome    = length(unique(data$outcome)),
+                          n.tx         = length(unique(data$tx)))
+  class(dataList)    <- "rankinma"
+  dataList$data      <- dataSet
+  dataList$data.sets <- split(dataSet, dataSet$outcome)
+  dataList$color.txs <- txColor
+  dataRankinma       <- dataList
 
-  dataList              <- dataSet
-  class(dataList)       <- "rankinma"
-  dataList$metrics.name <- metrics.name
-  dataList$ls.outcome   <- unique(data$outcome)
-  dataList$ls.tx        <- unique(data$tx)
-  dataList$n.outcome    <- length(unique(data$outcome))
-  dataList$n.tx         <- length(unique(data$tx))
-  dataList$data         <- dataSet
-  dataRankinma          <- dataList
 
   cat(paste("\n"), fill = TRUE, sep = "")
   cat(paste("Summary of metrics:\n",
@@ -267,18 +293,23 @@ SetMetrics <- function(data,
   cat(paste(" ", c(1:dataList$n.tx), dataList$ls.tx, sep = " "),
       fill = TRUE, sep = "\n")
 
-  dataRankinma  <- dataList
+  dataRankinma <- dataList
 
 }
 
 
-#' @title Display color of each treatment
+#' @title Display color for each treatment
+#'
+#' @author Enoch Kang
 #'
 #' @description
 #' ShowColor is a function for showing colors of every treatment on plot of
 #' treatment rank metrics in *rankinma*.
 #'
 #' @param data DATA of *rankinma* class.
+#'
+#' @return
+#' **ShowColor()** show a plot of color for each treatment.
 #'
 #' @export ShowColor
 
