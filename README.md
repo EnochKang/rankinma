@@ -1,18 +1,9 @@
 <img src="https://github.com/EnochKang/rankinma/blob/main/vignettes/rankinma_logo.png?raw=true" width="15%" />
 
-# *rankinma*: Ranks of treatments in synthesis
-
-## Authors
-
-[Chiefeng Chen](https://orcid.org/0000-0002-1595-6553),
-[Enoch Kang](https://orcid.org/0000-0002-4903-942X),
-[Wen-Hsuan Hou](https://orcid.org/0000-0002-4376-6298),
-[Jin-Hua Chen](https://orcid.org/0000-0002-3130-4125),
-[Yu-Chieh Chuang](https://orcid.org/0000-0002-7124-6556), &
-[Edwin Chan](https://www.duke-nus.edu.sg/core/about/people-leadership/core-visiting-experts/edwin-chan-shih-yen)
-
+# *rankinma*: Ranking in network meta-analysis
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/rankinma)](https://cran.r-project.org/package=rankinma)
+[![License: GPL (>=3)](https://img.shields.io/badge/license-GPL-blue)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Monthly
 Downloads](http://cranlogs.r-pkg.org/badges/rankinma)](http://cranlogs.r-pkg.org/badges/rankinma)
 [![metacran
@@ -24,22 +15,34 @@ concerns regarding heterogeneity, intransitivity, and incoherence. This
 package not only accepts manual-prepared data set of treatment ranking
 metrics from users, but also can help users to gather various treatment
 ranking metrics in network meta-analysis no matter using frequentist or
-Bayesian approach. Users can install *rankinma* in R using following
-syntax:
+Bayesian approach. *rankinma* has been formally released on the CRAN, 
+and will be updated directly on the CRAN. Users can install *rankinma* 
+in R using following syntax:
 
     install.packages("rankinma")
+
+
+## Authors
+
+[Chiefeng Chen](https://orcid.org/0000-0002-1595-6553),
+[Enoch Kang](https://orcid.org/0000-0002-4903-942X),
+[Wen-Hsuan Hou](https://orcid.org/0000-0002-4376-6298),
+[Jin-Hua Chen](https://orcid.org/0000-0002-3130-4125),
+[Yu-Chieh Chuang](https://orcid.org/0000-0002-7124-6556), &
+[Edwin Chan](https://www.duke-nus.edu.sg/core/about/people-leadership/core-visiting-experts/edwin-chan-shih-yen)
 
 -   [Feature](#features)
 -   [Flow and functions](#flow-and-functions)
 -   [Usage and examples](#usage-and-examples)
 -   [To do list](#to-do-list)
 
-## Feature
+
+## Features
 
 *rankinma* allows users to visualize various treatment ranking metrics
 in network meta-analysis based either common-effect model or
-random-effects model. The current version includes three common metrics
-of treatment ranking.
+random-effects model no matter using frequentist or Bayesian approach.
+The current version includes three common metrics of treatment ranking.
 
 -   **Probabilities:** probabilities of every available treatment on
     each possible rank.
@@ -51,7 +54,7 @@ Briefly, *rankinma* can be used for visualization of both detailed
 metrics of probabilities and global metrics (i.e. SUCRA and P-score).
 Besides, *rankinma* provides users multiple types of plots to illustrate
 aforementioned treatment ranking metrics, and current version consists
-of five types of plots with six sub-types.
+of five types of plots.
 
 -   **Beading plot:** a novel graphics for displaying global metrics of
     treatment ranking (i.e. SUCRA and P-score) based on numeric line
@@ -65,6 +68,15 @@ of five types of plots with six sub-types.
     supports two sub-type of line chart in terms of simple line chart (a
     line on a chart) and composite line chart (multiple lines on a
     chart).
+-   **Heat plot:** a new graphics for showing global metrics of
+    treatment ranking (i.e. SUCRA and P-score) for each outcome, and
+    *rankinma* supports to gather all heat plots of outcomes with
+    interests on a plot.
+-   **Spie chart:** a new graphics proposed in 2020 for displaying
+    multiple global metrics of treatment ranking (i.e. SUCRA and
+    P-score) from outcomes with interests by each treatment, and
+    *rankinma* supports to place all spie charts on a plot.
+
 
 ## Flow and functions
 
@@ -88,7 +100,7 @@ single outcome** but do not get treatment ranking metrics yet.
 `SetMetrics()`.
 
        **Step 3.** Visualization using function `PlotBeads()`,
-`PlotBar()`, or `PlotLine()`.
+`PlotBar()`, `PlotLine()`, `PlotHeat()`, or `PlotSpie()`.
 
 #### For situation 2:
 
@@ -101,7 +113,7 @@ meta-analysis using function `GetMetrics()`.
 `SetMetrics()`.
 
        **Step 4.** Visualization using function `PlotBeads()`,
-`PlotBar()`, or `PlotLine()`.
+`PlotBar()`, `PlotLine()`, or `PlotHeat()`.
 
 #### For situation 3:
 
@@ -122,7 +134,7 @@ them for the further steps. — — —
 `SetMetrics()`.
 
        **Step 5.** Visualization using function `PlotBeads()`,
-`PlotBar()`, or `PlotLine()`.
+`PlotBar()`, `PlotLine()`, `PlotHeat()`, or `PlotSpie()`.
 
 ## Usage and examples
 
@@ -197,8 +209,6 @@ metrics yet.
 >     PlotLine(data = dataRankinma, compo = TRUE)
 >
 > Output:
->
->     ## 載入需要的套件：meta
 >
 >     ## Loading 'meta' package (version 6.0-0).
 >     ## Type 'help(meta)' for a brief overview.
@@ -358,7 +368,6 @@ metrics yet.
 
 Task force will keep update package *rankinma* for following issues:
 
--   Scatter plot
--   Heat plot
--   Spie plot
+-   Merged line plot.
 -   User-designed color gradient for heat plot.
+-   Scatter plot
