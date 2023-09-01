@@ -85,7 +85,7 @@ Briefly, *rankinma* can be used for visualization of both detailed metrics of pr
 Package *rankinma* has been formally released on the [CRAN](https://cran.r-project.org/web/packages/rankinma/index.html), and users can install *rankinma* in R using following syntax:
 
 ```{r}
-install.packages("aides")
+install.packages("rankinma")
 ```
 
 <br>
