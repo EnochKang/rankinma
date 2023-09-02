@@ -1,0 +1,24 @@
+tx,SUCRA,outcome
+Bovine collagen,0.6094,nodule
+CaHA,0.5714,nodule
+HA,0.7962,nodule
+Human collagen,0.2716,nodule
+Poly-L-la ctic acid,0.2466,nodule
+Porcine collagen,0.5048,nodule
+Bovine collagen,0.1846667,erythema
+CaHA,0.715,erythema
+HA,0.5433333,erythema
+Porcine collagen,0.557,erythema
+Bovine collagen,0.4136667,pain
+CaHA,0.4953333,pain
+HA,0.634,pain
+Porcine collagen,0.457,pain
+Bovine collagen,0.209,swelling
+HA,0.333,swelling
+Porcine collagen,0.958,swelling
+Bovine collagen,0.666,bruising
+HA,0.6045,bruising
+Porcine collagen,0.2295,bruising
+Bovine collagen,0.1375,pruritis
+CaHA,0.8035,pruritis
+HA,0.559,pruritis
