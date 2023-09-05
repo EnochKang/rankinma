@@ -30,7 +30,7 @@ Chan](https://www.duke-nus.edu.sg/core/about/people-leadership/core-visiting-exp
 &nbsp; [![Functions](https://img.shields.io/badge/Functions-7-green.svg?logo=r&logoColor=green)](https://cran.r-project.org/web/packages/rankinma/rankinma.pdf)
 &nbsp; [![Dependencis](https://tinyverse.netlify.com/badge/rankinma)](https://cran.r-project.org/package=rankinma)
 &nbsp; [![Monthly Downloads](https://cranlogs.r-pkg.org:443/badges/rankinma?color=orange)](https://cranlogs.r-pkg.org:443/badges/rankinma)
-&nbsp; [![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/aides?color=orange)](https://cran.r-project.org/package=rankinma)
+&nbsp; [![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/rankinma?color=orange)](https://cran.r-project.org/package=rankinma)
 
 <!-- badges: end -->
 <!-- content: start -->
